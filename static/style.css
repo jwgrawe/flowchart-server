@@ -1,0 +1,107 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-container {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#chat-history {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    padding-right: 10px; /* Add some padding for scrollbar */
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+}
+
+#prompt-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    resize: none; /* Prevent manual resizing */
+    min-height: 40px;
+}
+
+#send-button {
+    padding: 10px 15px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+}
+
+#send-button:hover {
+    background-color: #4cae4c;
+}
+
+.preview-container {
+    flex: 2;
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#mermaid-code {
+    display: block;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    white-space: pre-wrap; /* Wrap long lines */
+    word-break: break-all; /* Break words if necessary */
+    overflow-x: auto; /* Add horizontal scroll for very long lines */
+}
+
+.mermaid {
+    margin-top: 20px;
+    text-align: center; /* Center the diagram */
+}
+
+.download-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-buttons button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #eee;
+}
+
+.download-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

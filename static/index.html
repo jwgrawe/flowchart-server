@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Flowchart Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-container">
+            <div id="chat-history"></div>
+            <div class="input-area">
+                <textarea id="prompt-input" placeholder="Enter your prompt..."></textarea>
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div class="preview-container">
+            <h3>Raw Mermaid Code:</h3>
+            <pre><code id="mermaid-code"></code></pre>
+            <h3>Flowchart Preview:</h3>
+            <div class="mermaid"></div>
+            <div class="download-buttons">
+                <button id="download-svg" disabled>Download SVG</button>
+                <button id="download-png" disabled>Download PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.esm.min.mjs';
+        window.mermaid = mermaid;
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

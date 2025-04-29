@@ -11,6 +11,9 @@ app = Flask(__name__)
 # In a real application, this should be a strong, randomly generated key
 app.secret_key = 'your_simple_placeholder_secret_key'
 
+# Disable authentication flag
+DISABLE_AUTH = os.getenv('DISABLE_AUTH', 'False').lower() == 'true'
+
 # Hardcoded credentials (for demonstration purposes)
 USERNAME = os.getenv('APP_USERNAME', 'guest')
 PASSWORD = os.getenv('APP_PASSWORD', 'your_password')
@@ -18,7 +21,7 @@ PASSWORD = os.getenv('APP_PASSWORD', 'your_password')
 @app.route('/')
 def index():
     # Require authentication for the main route
-    if not session.get('logged_in'):
+    if not DISABLE_AUTH and not session.get('logged_in'):
         return redirect(url_for('login'))
     # Render the static index.html file
     # Assuming index.html is in a 'static' folder relative to app.py
@@ -51,7 +54,7 @@ def logout():
 @app.route('/generate_mermaid', methods=['POST'])
 def generate_mermaid():
     # Require authentication for the API endpoint
-    if not session.get('logged_in'):
+    if not DISABLE_AUTH and not session.get('logged_in'):
         return jsonify({"error": "Unauthorized"}), 401
 
     try:

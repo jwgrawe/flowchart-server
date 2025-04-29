@@ -21,6 +21,13 @@ The application now uses a `.env` file to manage credentials for the default `gu
     ```
 3.  If the `.env` file is not present or these variables are not set, the application will default to `APP_USERNAME=guest` and `APP_PASSWORD=your_password`.
 
+## Environment Variables
+
+* **DISABLE_AUTH**: Set to `True` to bypass authentication checks (useful for testing). Example:
+  ```dotenv
+  DISABLE_AUTH=True
+  ```
+
 ## Building and Running with Docker Compose
 
 Docker Compose simplifies the process of building and running the application. Navigate to the root directory of the project in your terminal (where the `docker-compose.yml` file is located).

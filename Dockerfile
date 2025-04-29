@@ -11,6 +11,8 @@ COPY .env .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY frontend/build/ frontend/build/
+
 # Copy the rest of the application files into the working directory
 COPY app.py .
 COPY templates/ templates/

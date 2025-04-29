@@ -5,55 +5,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize the Flask app
-app = Flask(__name__)
-# Set a secret key for session management
-# In a real application, this should be a strong, randomly generated key
-app.secret_key = 'your_simple_placeholder_secret_key'
+# Initialize the Flask app, serving static files from the React build directory
+app = Flask(__name__, static_folder='frontend/build', static_url_path='/')
 
 # Disable authentication flag
 DISABLE_AUTH = os.getenv('DISABLE_AUTH', 'False').lower() == 'true'
 
-# Hardcoded credentials (for demonstration purposes)
-USERNAME = os.getenv('APP_USERNAME', 'guest')
-PASSWORD = os.getenv('APP_PASSWORD', 'your_password')
-
 @app.route('/')
 def index():
-    # Require authentication for the main route
-    if not DISABLE_AUTH and not session.get('logged_in'):
-        return redirect(url_for('login'))
-    # Render the static index.html file
-    # Assuming index.html is in a 'static' folder relative to app.py
+    # Serve the index.html file from the React build output
     return app.send_static_file('index.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        if username == USERNAME and password == PASSWORD:
-            session['logged_in'] = True
-            return redirect(url_for('index'))
-        else:
-            error = 'Invalid Credentials. Please try again.'
-    # For GET requests or failed POST requests, render the login template
-    # Assuming login.html is in a 'templates' folder relative to app.py
-    # You would typically pass the 'error' variable to the template here
-    # For simplicity, we'll just return a basic message or render logic in a real template
-    from flask import render_template
-    return render_template('login.html', error=error)
-
-@app.route('/logout')
-def logout():
-    # Clear the session and redirect to login
-    session.clear()
-    return redirect(url_for('login'))
 
 @app.route('/generate_mermaid', methods=['POST'])
 def generate_mermaid():
-    # Require authentication for the API endpoint
+    # Authentication check based on DISABLE_AUTH flag
     if not DISABLE_AUTH and not session.get('logged_in'):
         return jsonify({"error": "Unauthorized"}), 401
 
@@ -92,7 +57,5 @@ def generate_mermaid():
 
 # Standard Flask run block
 if __name__ == '__main__':
-    # Ensure the static and templates directories exist (optional, but good practice)
-    os.makedirs('static', exist_ok=True)
-    os.makedirs('templates', exist_ok=True)
+    # The static directory is now frontend/build, no need to create 'static' or 'templates'
     app.run(debug=True) # Set debug=False in production

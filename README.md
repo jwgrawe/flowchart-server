@@ -40,37 +40,18 @@ To run this application, you need the following installed and running on your sy
     DISABLE_AUTH=True
     ```
 
-## Building and Running with Docker Compose
+## Development Setup with Docker and React Development Server
 
-Docker Compose simplifies the process of building and running the application. Navigate to the root directory of the project in your terminal (where the `docker-compose.yml` file is located).
+This setup allows running both the Flask backend and the React frontend development server using a single Docker Compose command.
 
-1.  **Build the React frontend:**
-    Navigate to the `frontend` directory:
-    ```bash
-    cd frontend
-    ```
-    Run the build command:
-    ```bash
-    npm run build
-    ```
-    This creates the static files in `frontend/build`.
-
-2.  **Build and run the Docker containers:**
-    Navigate back to the project root directory:
-    ```bash
-    cd ..
-    ```
+1.  **Start both backend and frontend:**
+    Navigate to the project root directory in your terminal (where the `docker-compose.yml` file is located).
     Run the Docker Compose command:
     ```bash
     docker compose up --build
     ```
+    This will build the necessary Docker images and start both the Flask backend and the React frontend development server.
 
-## Accessing the Application
+The application will be accessible at `http://localhost:3000`. The frontend is configured to automatically proxy API requests (e.g., to `/generate_mermaid`) to the Flask backend service within the Docker network.
 
-After running the Docker containers, open your web browser and navigate to:
-
-```
-http://localhost:5000
-```
-
-The chat-based flowchart generator interface should now be accessible.
+For production deployment, `npm run build` in the `frontend` directory and rebuilding the Docker image are still necessary.
